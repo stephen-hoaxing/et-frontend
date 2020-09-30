@@ -192,6 +192,8 @@ input:focus {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
+  background-color: rgb(233, 233, 233);
 }
 
 /* The switch - the box around the slider */
