@@ -7,6 +7,7 @@ const TransactionList = () => {
   const { getTransactions, transactions, loading } = useContext(ExpenseContext);
   useEffect(() => {
     getTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return loading ? (
     <Loading />

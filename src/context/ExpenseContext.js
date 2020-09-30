@@ -42,7 +42,7 @@ export const ExpenseContextProvider = ({ children }) => {
 
   const deleteTransaction = async (id) => {
     try {
-      const res = await axios.delete(`/api/v1/transactions/${id}`);
+      await axios.delete(`/api/v1/transactions/${id}`);
       dispatch({
         type: "DELETE_TRANSACTION",
         payload: id,
