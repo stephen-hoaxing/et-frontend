@@ -35,8 +35,7 @@ export const ExpenseContextProvider = ({ children }) => {
   const getTransactions = async () => {
     try {
       const res = await axios.get(
-        "https://et-mern.herokuapp.com/api/v1/transactions",
-        headerConfig
+        "https://et-mern.herokuapp.com/api/v1/transactions"
       );
       dispatch({
         type: "GET_TRANSACTIONS",
@@ -53,8 +52,7 @@ export const ExpenseContextProvider = ({ children }) => {
   const deleteTransaction = async (id) => {
     try {
       await axios.delete(
-        `https://et-mern.herokuapp.com/api/v1/transactions/api/v1/transactions/${id}`,
-        headerConfig
+        `https://et-mern.herokuapp.com/api/v1/transactions/api/v1/transactions/${id}`
       );
       dispatch({
         type: "DELETE_TRANSACTION",
@@ -73,8 +71,8 @@ export const ExpenseContextProvider = ({ children }) => {
       const config = {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          // "Access-Control-Allow-Origin": "*",
+          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
       const res = await axios.post(
