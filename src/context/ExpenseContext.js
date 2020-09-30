@@ -13,12 +13,12 @@ export const ExpenseContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const [theme, setTheme] = useState("light");
 
-  const headerConfig = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
+  // const headerConfig = {
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  //   },
+  // };
 
   const toggleTheme = () => {
     if (theme === "light") {
@@ -71,8 +71,6 @@ export const ExpenseContextProvider = ({ children }) => {
       const config = {
         headers: {
           "Content-Type": "application/json",
-          // "Access-Control-Allow-Origin": "*",
-          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
       const res = await axios.post(
