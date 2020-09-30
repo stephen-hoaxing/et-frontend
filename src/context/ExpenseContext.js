@@ -13,6 +13,13 @@ export const ExpenseContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const [theme, setTheme] = useState("light");
 
+  const headerConfig = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -28,7 +35,8 @@ export const ExpenseContextProvider = ({ children }) => {
   const getTransactions = async () => {
     try {
       const res = await axios.get(
-        "http://et-mern.herokuapp.com/api/v1/transactions"
+        "https://et-mern.herokuapp.com/api/v1/transactions",
+        headerConfig
       );
       dispatch({
         type: "GET_TRANSACTIONS",
@@ -45,7 +53,8 @@ export const ExpenseContextProvider = ({ children }) => {
   const deleteTransaction = async (id) => {
     try {
       await axios.delete(
-        `http://et-mern.herokuapp.com/api/v1/transactions/api/v1/transactions/${id}`
+        `https://et-mern.herokuapp.com/api/v1/transactions/api/v1/transactions/${id}`,
+        headerConfig
       );
       dispatch({
         type: "DELETE_TRANSACTION",
@@ -64,10 +73,12 @@ export const ExpenseContextProvider = ({ children }) => {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
       const res = await axios.post(
-        "http://et-mern.herokuapp.com/api/v1/transactions/api/v1/transactions",
+        "https://et-mern.herokuapp.com/api/v1/transactions/api/v1/transactions",
         transaction,
         config
       );
