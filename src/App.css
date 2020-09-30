@@ -1,38 +1,422 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100%;
+  transition: 0.4s background-color ease;
+}
+
 .App {
+  min-width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(auto-fill, 1fr));
+  grid-template-rows: 70px 1fr;
+  transition: 0.3s background-color ease;
+}
+
+.light {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.dark {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(56, 56, 56);
+}
+
+.light-color {
+  color: #000;
+}
+
+.dark-color {
+  color: rgb(233, 233, 233);
+}
+
+.dark-border,
+.light-border {
+  border: none;
+  display: inline-block;
+  font-size: 1.4rem;
+  margin: 0 auto 0 40px;
+  background-color: transparent;
+}
+
+.dark-border {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.light-border {
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+
+.header {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  padding-top: 20px;
   text-align: center;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.transaction-container {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  padding: 20px 70px 70px 70px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.transaction-list {
+  list-style-type: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(233, 233, 233);
+  padding: 10px;
+  margin: 20px 70px;
+  font-size: 1.4rem;
+  position: relative;
+  transition: 0.4s background-color ease;
+}
+
+.plus {
+  border-right: 7px solid green;
+}
+
+.minus {
+  border-right: 7px solid red;
+}
+
+.delete-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: orange;
+  color: #fff;
+  font-size: 1.4rem;
+  position: absolute;
+  right: 102%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: 0.4s opacity ease;
+}
+
+.delete-btn:focus {
+  outline: none;
+}
+
+.transaction-item:hover {
+  background-color: rgba(255, 166, 0, 0.9);
+}
+
+.transaction-item:hover .delete-btn {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.balance-parent-container {
+  position: fixed;
+  width: 400px;
+  height: 100vh;
+}
+
+.balance-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.balance-container h1 {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  transform: translateY(-30%);
+}
+
+.form-container {
+  position: fixed;
+  width: 400px;
+  height: 100vh;
+}
+
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.form {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 50%;
+  left: 20%;
+}
+
+.form {
+  position: absolute;
+}
+
+.form-control {
+  width: 100%;
+  display: block;
+  padding: 20px;
+}
+
+.form-control label {
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  display: inline-block;
+  width: 90px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.add-btn {
+  position: absolute;
+  border: none;
+  font-size: 1.4rem;
+  padding: 20px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(233, 233, 233);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(56, 56, 56);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #fff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #fff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.toggle {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  z-index: 1;
+}
+
+.loading {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9;
+}
+
+.loading h1 {
+  color: #fff;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: animate-loading 1s forwards infinite;
+}
+
+@keyframes animate-loading {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100vh;
+    width: 100%;
+  }
+
+  .App {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto-fill, 1fr));
+    grid-template-rows: 100px auto-fit auto-fit;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .balance-parent-container {
+    position: absolute;
+    width: 60%;
+    height: 90px;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  .balance-container h1 {
+    font-size: 1.4rem;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-20%, -50%);
+    font-size: 1rem;
+  }
+
+  .transaction-container {
+    width: 100%;
+    grid-column: 1 / 3;
+    padding: 0 70px;
+    grid-row: 2 / 3;
+    margin: 40px auto;
+  }
+
+  .transaction-item {
+    width: 100%;
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+
+  .delete-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .form-container {
+    position: relative;
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    width: 100%;
+  }
+
+  .main-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .form {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .form-control input {
+    width: 40%;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    margin: 0;
+  }
+
+  .form-control label {
+    margin-left: 40px;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+  }
+
+  .add-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .toggle {
+    width: 100%;
+    height: 90px;
+    position: relative;
+    padding-right: 90px;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    top: 0;
+    left: 0;
+  }
+
+  .switch {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-70%, -50%);
+  }
+
+  .loading {
+    width: 100vw;
+    height: 100vh;
   }
 }
